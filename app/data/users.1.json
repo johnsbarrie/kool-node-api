@@ -1,0 +1,26 @@
+[
+  {
+    "id": "john45678",
+    "user": "john",
+    "password": "john",
+    "email": "john@lamenagerie.com"
+  },
+  {
+    "id": "peter45678567",
+    "user": "peter",
+    "password": "peter",
+    "email": "peter@lamenagerie.com"
+  },
+  {
+    "id": "luc123445678",
+    "user": "luc",
+    "password": "luc",
+    "email": "luc@lamenagerie.com"
+  },
+  {
+    "id": "dad45678567",
+    "user": "dad",
+    "password": "dad",
+    "email": "dad@lamenagerie.com"
+  }
+]

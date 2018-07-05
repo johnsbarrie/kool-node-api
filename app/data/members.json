@@ -1,0 +1,57 @@
+[
+  { 
+    "projectid": "4567567883",
+    "userid": "luc123445678",
+    "role": "owner"
+  },
+  { 
+    "projectid": "3456789",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  { 
+    "projectid": "new241823",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  { 
+    "projectid": "3456789",
+    "userid": "luc123445678",
+    "role": "animator"
+  },
+  { 
+    "projectid": "456783",
+    "userid": "luc123445678",
+    "role": "owner"
+  },
+  { 
+    "projectid": "456783",
+    "userid": "john45678",
+    "role": "animator"
+  },
+  { 
+    "projectid": "456783",
+    "userid": "peter45678567",
+    "role": "critic"
+  },
+  { 
+    "projectid": "4567567883",
+    "userid": "peter45678567",
+    "role": "critic"
+  },
+  { 
+    "projectid": "4",
+    "userid": "john45678",
+    "role": "critic"
+  },
+  { 
+    "projectid": "4",
+    "userid": "peter45678567",
+    "role": "owner"
+  },
+  { 
+    "projectid": "5",
+    "userid": "dad45678567",
+    "role": "owner"
+  }
+]
