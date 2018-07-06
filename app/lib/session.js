@@ -17,20 +17,20 @@ exports.memberOfProject = function (userid, projectid) {
     return ((member.projectid === projectid) && 
       (member.userid === userid))
   });
-  
   return member;
 }
 
 function canReadProject(member, projectstatus) {
-  return projectstatus === 'public' || member;
+  return ((projectstatus === 'public') 
+  || (member.role === 'critic' || member.role === 'owner' || member.role === 'animator'));
 }
 
 function canEditProject (member) {
-  return member && (member.role=='owner');
+  return ((!!member) && (member.role==='owner'));
 }
 
 function canCreateShots (member) {
-  return member && (member.role=='owner' || member.role=='animator');
+  return ((!!member) && (member.role=='owner' || member.role=='animator'));
 }
 
 exports.projectRights = function (member, projectstatus) {
