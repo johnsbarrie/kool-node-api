@@ -21,10 +21,6 @@ exports.readSessions = function  () {
   return JSON.parse(fs.readFileSync(sessionJSON, 'utf8'));
 }
 
-exports.readShots = function  () {
-  return JSON.parse(fs.readFileSync(shotsJSON, 'utf8'));
-}
-
 exports.writeSessions = function  (sessions) {
   fs.writeFileSync(sessionJSON, JSON.stringify(sessions));
 }
@@ -33,24 +29,6 @@ function hasCorrectProps(newproject) {
   const publishTypes = ['private', 'public'];
   
   return (newproject.title && newproject.description && publishTypes.includes(newproject.status));
-}
-
-exports.updateProject = function  ( newproject, projectid) {
-  if (!hasCorrectProps(newproject)) {
-    return { error: 'INCORRECT_PROJECT_PROPERTY'}
-  }
-
-  const projects = exports.readProjects()
-    .map(function(project) {
-      if (project.id === projectid) {
-        newproject.id = project.id;
-        return newproject;
-      }
-      return project;
-    });
-  
-  fs.writeFileSync(projectJSON, JSON.stringify(projects, null, 2));
-  return { success: true}
 }
 
 exports.createProject = function  ( newproject) {
@@ -67,6 +45,31 @@ exports.createProject = function  ( newproject) {
     project: newproject
   }
 }
+
+exports.updateProject = function  ( newproject, projectid) {
+  if (!hasCorrectProps(newproject)) {
+    return { error: 'INCORRECT_PROJECT_PROPERTY'}
+  }
+
+  const projects = exports.readProjects()
+    .map(function(project) {
+      if (project.id === projectid) {
+        newproject.id = project.id;
+
+        return {
+          id: project.id,
+          title: newproject.title,
+          description: newproject.description,
+          status: newproject.status
+        };
+      }
+      return project;
+    });
+  
+  fs.writeFileSync(projectJSON, JSON.stringify(projects, null, 2));
+  return { success: true}
+}
+
 
 exports.deleteProject = function (projectid) {
   const projects = exports.readProjects().filter(function(project) {
@@ -87,3 +90,5 @@ exports.createMember = function (projectid, userid, role) {
   members.push(newMember);
   fs.writeFileSync(memberJSON, JSON.stringify(members, null, 2));
 }
+
+

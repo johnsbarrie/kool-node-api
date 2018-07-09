@@ -1,15 +1,17 @@
 
 const loggedIn = require('../lib/session').loggedIn;
 const memberOfProject = require('../lib/session').memberOfProject;
+const allMembersOfProject = require('../lib/session').allMembersOfProject;
+const userWithID = require('../lib/session').userWithID;
 const projectRights = require('../lib/session').projectRights;
-const readProjects = require('../lib/access_json').readProjects;
-const createProject = require('../lib/access_json').createProject;
-const updateProject = require('../lib/access_json').updateProject;
-const deleteProject = require('../lib/access_json').deleteProject;
-const createMember = require('../lib/access_json').createMember;
-const readMembers = require('../lib/access_json').readMembers;
-const readUsers = require('../lib/access_json').readUsers;
-const readShots = require('../lib/access_json').readShots;
+const readProjects = require('../lib/access_project_json').readProjects;
+const createProject = require('../lib/access_project_json').createProject;
+const updateProject = require('../lib/access_project_json').updateProject;
+const deleteProject = require('../lib/access_project_json').deleteProject;
+const createMember = require('../lib/access_project_json').createMember;
+const readMembers = require('../lib/access_project_json').readMembers;
+const readUsers = require('../lib/access_project_json').readUsers;
+const readShots = require('../lib/access_shot_json').readShots;
 
 module.exports = function(app, db) {
 
@@ -82,14 +84,18 @@ module.exports = function(app, db) {
       });
 
       const member = memberOfProject(req.query.userid, req.params.id);
-      
       project.rights = projectRights(member, project.status);
+
+      const members = allMembersOfProject(req.params.id).map (function (member) {
+        return { ...member, username: userWithID(member.userid).user};
+      })
+      
+      project.members = members;
     }
 
     if (project && project.rights.canReadProject) {      
       res.send(JSON.stringify(result));
     } else {
-      console.log(project)
       res.send(JSON.stringify({ error: 'ACCESS_DENIED'}));
     }
   });
@@ -98,9 +104,11 @@ module.exports = function(app, db) {
   app.put('/projects/:id', (req, res) => {
     const project = readProjects().find(function (p) {
       return p.id === req.params.id
-    })
+    });
+
     const member = memberOfProject(req.query.userid, req.params.id);
     const rights = projectRights(member, project.status);
+    
     if (loggedIn(req.query) && rights.canEditProject) {
       res.send(updateProject(req.body, req.params.id));
     } else {

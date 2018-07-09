@@ -22,5 +22,12 @@
     "user": "dad",
     "password": "dad",
     "email": "dad@lamenagerie.com"
+  },
+  {
+    "id": "nico45678",
+    "user": "nico",
+    "password": "nico",
+    "email": "nico@lamenagerie.com"
   }
+  
 ]
