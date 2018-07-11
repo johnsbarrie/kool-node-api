@@ -1,48 +1,43 @@
-const { loggedIn } = require('../lib/session');
+const loggedIn = require('../lib/session').loggedIn;
 const { memberOfProject } = require('../lib/session');
 const { projectRights } = require('../lib/session');
 const { readProjects } = require('../lib/access_project_json');
-const { readUsers } = require('../lib/access_project_json');
-const { readShot, createShot, updateShot, deleteShot } = require('../lib/access_shot_json');
+const { readMembers, createMember, updateMember, deleteMember } = require('../lib/access_member_json');
 
 const rightsForProject = function(req){
   const project = readProjects().find(function (p) {
     return p.id === req.params.project_id
   });
 
+  if(!project) { return {} }
   const member = memberOfProject(req.query.userid, req.params.project_id);
   return projectRights(member, project.status) || {};
 }
 
 module.exports = function(app, db) {
+
   /** LIST SHOTS */
-  app.get('/projects/:project_id/shots/', (req, res) => {
+  app.get('/projects/:project_id/members/', (req, res) => {
     const rights = rightsForProject(req);
-    if(loggedIn(req.query) && rights && rights.canReadProject){
+    if(loggedIn(req.query) && rights && rights['canReadProject']){
       
-      const shots = readShots().filter(function(shot){
-        return (shot.projectid === req.params.project_id)
-      }).map(function(shot){
-        const creatorUser = readUsers().filter(function(user) {
-          return (user.id === shot.userid);
-        }).pop();
-        shot.user = creatorUser.user
-        return shot
+      const members = readMembers().filter(function(member){
+        return (member.projectid === req.params.project_id)
       });
 
-      res.send(JSON.stringify(shots));
+      res.send(JSON.stringify(members));
     } else {
       res.send(JSON.stringify({ error: 'ACCESS_DENIED'}));
     }
   })
 
   /** CREATE SHOTs */
-  app.post('/projects/:project_id/shots/', (req, res) => {
+  app.post('/projects/:project_id/members/', (req, res) => {
     const rights = rightsForProject(req);
-    if (loggedIn(req.query) && rights && rights.canCreateShots){
+    if (loggedIn(req.query) && rights && rights.canEditProject){
       res.send({
         success:true,
-        shot: createShot(req.body, project.id, req.query.userid)
+        member: createMember(req.body, req.params.project_id)
       });
     } else {
       res.send(JSON.stringify({ error: 'ACCESS_DENIED'}));
@@ -50,9 +45,10 @@ module.exports = function(app, db) {
   });
 
   /** SHOT BY ID */
-  app.get('/projects/:project_id/shots/:id', (req, res) => {
+  app.get('/projects/:project_id/members/:id', (req, res) => {
     const rights = rightsForProject(req);
     if (project.status === 'public' || (loggedIn(req.query) && rights.canReadProject)) {
+      
       res.send(readShot(req.params.id, project.id));
       return 
     };
@@ -60,14 +56,12 @@ module.exports = function(app, db) {
   });
 
   /** UPDATE SHOT BY ID */
-  app.put('/projects/:project_id/shots/:id', (req, res) => {
+  app.put('/projects/:project_id/members/:id', (req, res) => {
     const rights = rightsForProject(req);
-    if (loggedIn(req.query) && rights.canCreateShots) {
-      res.send(updateShot(
-        req.query.userid,
+    if (loggedIn(req.query) && rights.canEditProject) {
+      res.send(updateMember(
         req.body,
-        req.params.project_id,
-        req.params.id
+        req.params.project_id
       ));
       return
     }
@@ -75,11 +69,11 @@ module.exports = function(app, db) {
   });
 
   /** DELETE SHOT */
-  app.delete('/projects/:project_id/shots/:id', (req, res) => {
+  app.delete('/projects/:project_id/members/:id', (req, res) => {
     const rights = rightsForProject(req);
 
-    if (loggedIn(req.query) && rights.canCreateShots) {
-      res.send(deleteShot(req.query.userid, req.params.project_id, req.params.id));
+    if (loggedIn(req.query) && rights.canEditProject) {
+      res.send(deleteMember(req.params.id, req.params.project_id));
       return 
     }
 

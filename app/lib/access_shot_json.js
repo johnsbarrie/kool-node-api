@@ -22,10 +22,7 @@ exports.createShot = function  (newshot, projectid, userid) {
 
   shots.push(newshot)
   fs.writeFileSync(shotsJSON, JSON.stringify(shots, null, 2));
-  return { 
-    success: true,
-    shot: newshot
-  }
+  return newshot;
 }
 
 exports.readShot = function  (shotid) {
@@ -57,7 +54,6 @@ exports.updateShot = function  (userid, shotData, project_id, shotid) {
     return shot;
   }); 
 
-  
   fs.writeFileSync(shotsJSON, JSON.stringify(shots, null, 2));
   return { 
     success: recordedChange
@@ -65,3 +61,23 @@ exports.updateShot = function  (userid, shotData, project_id, shotid) {
 }
 
 
+exports.deleteShot = function  (userid, project_id, shotid) {
+  var deletingShot = 'false'
+  const shots = exports.readShots().filter(function(shot) {
+    if (
+      !((shotid === shot.id) && 
+      (shot.userid === userid) && 
+      (shot.projectid === project_id))
+    ) {
+      return shot;
+    } else {
+      deletingShot = 'true';
+    }
+  });
+  
+  fs.writeFileSync(shotsJSON, JSON.stringify(shots, null, 2));
+    
+  return { 
+    success: deletingShot
+  }
+}

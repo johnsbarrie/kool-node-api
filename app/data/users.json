@@ -1,33 +1,38 @@
 [
   {
     "id": "john45678",
-    "user": "john",
+    "name": "john",
     "password": "john",
-    "email": "john@lamenagerie.com"
+    "email": "dood@lamenagerie.com"
   },
   {
     "id": "peter45678567",
-    "user": "peter",
+    "name": "peter",
     "password": "peter",
     "email": "peter@lamenagerie.com"
   },
   {
     "id": "luc123445678",
-    "user": "luc",
+    "name": "luc",
     "password": "luc",
     "email": "luc@lamenagerie.com"
   },
   {
     "id": "dad45678567",
-    "user": "dad",
+    "name": "dad",
     "password": "dad",
     "email": "dad@lamenagerie.com"
   },
   {
     "id": "nico45678",
-    "user": "nico",
+    "name": "nico",
     "password": "nico",
     "email": "nico@lamenagerie.com"
+  },
+  {
+    "name": "dood",
+    "email": "dood@lamenagerie.com",
+    "password": "dooaad",
+    "id": "user262022"
   }
-  
 ]

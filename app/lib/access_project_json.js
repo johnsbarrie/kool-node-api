@@ -3,7 +3,6 @@ const projectJSON = `${__dirname}/../data/projects.json`;
 const memberJSON = `${__dirname}/../data/members.json`;
 const sessionJSON = `${__dirname}/../data/sessions.json`;
 const userJSON = `${__dirname}/../data/users.json`;
-const shotsJSON = `${__dirname}/../data/shots.json`;
 
 exports.readProjects = function  () {
   return JSON.parse(fs.readFileSync(projectJSON, 'utf8'));
