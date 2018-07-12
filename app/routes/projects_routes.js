@@ -16,17 +16,11 @@ module.exports = function(app, db) {
   app.get('/projects', (req, res) => {
     const projects = readProjects().map(
       function(project) {
-        const ownerShip = readMembers().filter(
-          function (member) {
-            return (member.role === 'owner') && (member.projectid === project.id)
-          }
-        ).map(function (member) {
-          const ownerUser = readUsers().filter(function(user) {
-            return (member.userid === user.id);
-          }).pop()
-          return ownerUser.name
-        }).pop();
-        project.owner = ownerShip;
+        const members = allMembersOfProject(project.id)
+        .map (function (member) {
+          return { ...member, username: userWithID(member.userid).name};
+        })
+        project.members = members;
         return project;
       }
     );
@@ -83,9 +77,11 @@ module.exports = function(app, db) {
       const member = memberOfProject(req.query.userid, req.params.id);
       project.rights = projectRights(member, project.status);
 
-      const members = allMembersOfProject(req.params.id).map (function (member) {
+      const members = allMembersOfProject(req.params.id)
+      .map (function (member) {
         return { ...member, username: userWithID(member.userid).name};
       })
+
       
       project.members = members;
     }
@@ -119,6 +115,7 @@ module.exports = function(app, db) {
       res.send({error: 'NOT_LOGGED' });
     } else {
       setTimeout(function() {
+        
         const isMemberOfProjectWithSameTitle = !!(readProjects().filter(function (p) {
           return (p.title === req.body.title) && (memberOfProject(req.query.userid, p.id))
         }).length)
@@ -131,8 +128,18 @@ module.exports = function(app, db) {
         const createdProject = createProject(req.body);
         if (!createdProject.error) {
           createMember(createdProject.project.id, req.query.userid, 'owner');
+          if (req.body.members) {
+            req.body.members.map((member) => {
+              if (req.query.userid !== member.userid) {
+                createMember(createdProject.project.id,
+                  member.userid,
+                  member.role
+                )
+              }
+            })
+          }
         }
-        
+
         res.send(createdProject);
       },1000);
     }

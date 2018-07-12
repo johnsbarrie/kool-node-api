@@ -1,18 +1,9 @@
 const loggedIn = require('../lib/session').loggedIn;
 const { memberOfProject } = require('../lib/session');
-const { projectRights } = require('../lib/session');
+const { rightsForProject } = require('../lib/session');
 const { readProjects } = require('../lib/access_project_json');
 const { readMembers, createMember, updateMember, deleteMember } = require('../lib/access_member_json');
 
-const rightsForProject = function(req){
-  const project = readProjects().find(function (p) {
-    return p.id === req.params.project_id
-  });
-
-  if(!project) { return {} }
-  const member = memberOfProject(req.query.userid, req.params.project_id);
-  return projectRights(member, project.status) || {};
-}
 
 module.exports = function(app, db) {
 

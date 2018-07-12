@@ -6,7 +6,7 @@ const app            = express();
 app.use(cors())
 const port = 8000;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 require('./app/routes')(app, {});
 
 app.listen(port, () => {

@@ -30,14 +30,25 @@ function hasCorrectProps(newproject) {
   return (newproject.title && newproject.description && publishTypes.includes(newproject.status));
 }
 
-exports.createProject = function  ( newproject) {
-  if (!hasCorrectProps(newproject)) {
+function whitePropsProject (project) {
+  return {
+    title: project.title,
+    description: project.description,
+    status: project.status
+  }
+}
+
+exports.createProject = function  ( bodyProject) {
+  if (!hasCorrectProps(bodyProject)) {
     return { error: 'INCORRECT_PROJECT_PROPERTY'}
   }
   
   const projects = exports.readProjects();
+  
+  const newproject = whitePropsProject (bodyProject)
   newproject.id = `new${Math.floor(Math.random()*1000000)}`
   projects.push(newproject)
+  
   
   fs.writeFileSync(projectJSON, JSON.stringify(projects, null, 2));
   return { success: true,

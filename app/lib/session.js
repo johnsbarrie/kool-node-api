@@ -2,6 +2,7 @@ const fs = require('fs');
 const readSessions = require("./access_project_json").readSessions;
 const readMembers = require("./access_project_json").readMembers;
 const readUsers = require("./access_project_json").readUsers;
+const { readProjects } = require('../lib/access_project_json');
 
 exports.loggedIn = function (query) {
   const users = readSessions();
@@ -56,4 +57,13 @@ exports.projectRights = function (member, projectstatus) {
   };
   
   return projectRights;
+}
+
+exports.rightsForProject = function(req){
+  const project = readProjects().find(function (p) {
+    return p.id === req.params.project_id
+  });
+
+  const member = exports.memberOfProject(req.query.userid, req.params.project_id);
+  return exports.projectRights(member, project.status) || {};
 }

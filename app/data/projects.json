@@ -7,9 +7,9 @@
   },
   {
     "id": "3456789",
-    "title": "Arrolla",
+    "title": "Arrolla ",
     "description": "Arrolla was, a man who came to the city",
-    "status": "private"
+    "status": "public"
   },
   {
     "id": "456783",
@@ -40,5 +40,17 @@
     "title": "Kiwi",
     "description": "This is a short description of : Pat Limit",
     "status": "private"
+  },
+  {
+    "title": "John's film",
+    "description": "This is a great film",
+    "status": "private",
+    "id": "new858709"
+  },
+  {
+    "id": "new884751",
+    "title": "joooooo",
+    "description": "Dorrolla was, a man who came to the city",
+    "status": "public"
   }
 ]

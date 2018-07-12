@@ -18,7 +18,8 @@ function hasCorrectProps(member) {
   const roles = {
     critic: 'critic',
     owner: 'owner',
-    animator: 'animator'
+    animator: 'animator',
+    producer: 'producer'
   }
   return (member.userid && roles[member.role]);
 }

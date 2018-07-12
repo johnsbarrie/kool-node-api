@@ -36,14 +36,4 @@ module.exports = function(app, db) {
     }
     res.send({ error: 'ACCESS_DENIED'});
   });
-
-  /** DELETE USER */
-  app.delete('/users/:id', (req, res) => {
-    if (loggedIn(req.query)) {
-      res.send(deleteUser(req.query.userid));
-      return 
-    }
-    res.send({ error: 'ACCESS_DENIED'});
-  });
-
 }

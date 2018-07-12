@@ -1,18 +1,8 @@
 const { loggedIn } = require('../lib/session');
-const { memberOfProject } = require('../lib/session');
-const { projectRights } = require('../lib/session');
-const { readProjects } = require('../lib/access_project_json');
+const { rightsForProject } = require('../lib/session');
 const { readUsers } = require('../lib/access_project_json');
 const { readShot, createShot, updateShot, deleteShot } = require('../lib/access_shot_json');
 
-const rightsForProject = function(req){
-  const project = readProjects().find(function (p) {
-    return p.id === req.params.project_id
-  });
-
-  const member = memberOfProject(req.query.userid, req.params.project_id);
-  return projectRights(member, project.status) || {};
-}
 
 module.exports = function(app, db) {
   /** LIST SHOTS */
@@ -38,11 +28,12 @@ module.exports = function(app, db) {
 
   /** CREATE SHOTs */
   app.post('/projects/:project_id/shots/', (req, res) => {
+    console.log(req.body)
     const rights = rightsForProject(req);
     if (loggedIn(req.query) && rights && rights.canCreateShots){
       res.send({
         success:true,
-        shot: createShot(req.body, project.id, req.query.userid)
+        shot: createShot(req.body, req.params.project_id, req.query.userid)
       });
     } else {
       res.send(JSON.stringify({ error: 'ACCESS_DENIED'}));

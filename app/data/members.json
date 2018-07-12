@@ -54,5 +54,54 @@
     "role": "critic",
     "id": "new272765",
     "projectid": "3456789"
+  },
+  {
+    "projectid": "new858709",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "projectid": "new303210",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "projectid": "new417171",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "projectid": "new753268",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "projectid": "new859873",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "projectid": "new821970",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "projectid": "new884751",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "projectid": "new884751",
+    "userid": "luc123445678",
+    "role": "animator"
+  },
+  {
+    "projectid": "new884751",
+    "userid": "dad45678567",
+    "role": "critic"
   }
 ]

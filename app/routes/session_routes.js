@@ -18,9 +18,8 @@ function writeSessions (sessions) {
 module.exports = function(app, db) {
   app.post('/signin', (req, res) => {
     const request = req.body
-    console.log('request', req.body)
     const user = readUsers().find(function (u) {
-      return u.user === request.user && u.password === request.password
+      return u.name === request.name && u.password === request.password
     });
     
     if (user) {

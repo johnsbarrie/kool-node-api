@@ -3,7 +3,19 @@
     "id": "john45678",
     "name": "john",
     "password": "john",
-    "email": "dood@lamenagerie.com"
+    "email": "john@lamenagerie.com"
+  },
+  {
+    "id": "joanna45678",
+    "name": "joanna",
+    "password": "joanna",
+    "email": "joanna@lamenagerie.com"
+  },
+  {
+    "id": "jonathan45678",
+    "name": "jonathan",
+    "password": "jonathan",
+    "email": "jonathan@lamenagerie.com"
   },
   {
     "id": "peter45678567",
