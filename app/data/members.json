@@ -7,12 +7,14 @@
   {
     "projectid": "3456789",
     "userid": "john45678",
-    "role": "owner"
+    "role": "owner",
+    "username": "john"
   },
   {
     "projectid": "3456789",
     "userid": "luc123445678",
-    "role": "animator"
+    "role": "producer",
+    "username": "luc"
   },
   {
     "projectid": "456783",
@@ -53,7 +55,8 @@
     "userid": "dad45678567",
     "role": "critic",
     "id": "new272765",
-    "projectid": "3456789"
+    "projectid": "3456789",
+    "username": "dad"
   },
   {
     "projectid": "new858709",
@@ -67,10 +70,6 @@
   },
   {
     "projectid": "new417171",
-    "userid": "john45678",
-    "role": "owner"
-  },
-  {
     "userid": "john45678",
     "role": "owner"
   },
@@ -92,16 +91,64 @@
   {
     "projectid": "new884751",
     "userid": "john45678",
-    "role": "owner"
+    "role": "owner",
+    "username": "john"
   },
   {
     "projectid": "new884751",
     "userid": "luc123445678",
-    "role": "animator"
+    "role": "producer",
+    "username": "luc"
   },
   {
     "projectid": "new884751",
     "userid": "dad45678567",
+    "role": "critic",
+    "username": "dad"
+  },
+  {
+    "projectid": "new646918",
+    "userid": "john45678",
+    "role": "owner"
+  },
+  {
+    "projectid": "new646918",
+    "userid": "luc123445678",
+    "role": "producer"
+  },
+  {
+    "projectid": "new646918",
+    "userid": "dad45678567",
+    "role": "animator"
+  },
+  {
+    "projectid": "new646918",
+    "userid": "nico45678",
+    "role": "animator"
+  },
+  {
+    "projectid": "new646918",
+    "userid": "peter45678567",
     "role": "critic"
+  },
+  {
+    "userid": "nico45678",
+    "username": "nico",
+    "role": "animator",
+    "id": "new372534"
+  },
+  {
+    "projectid": "3456789",
+    "userid": "nico45678",
+    "username": "nico",
+    "role": "animator",
+    "id": "new362262"
+  },
+  {
+    "projectid": "new884751",
+    "userid": "nico45678",
+    "username": "nico",
+    "role": "animator",
+    "id": "new672431"
   }
 ]

@@ -1,15 +1,10 @@
 const fs = require('fs');
 const projectJSON = `${__dirname}/../data/projects.json`;
-const memberJSON = `${__dirname}/../data/members.json`;
 const sessionJSON = `${__dirname}/../data/sessions.json`;
 const userJSON = `${__dirname}/../data/users.json`;
 
 exports.readProjects = function  () {
   return JSON.parse(fs.readFileSync(projectJSON, 'utf8'));
-}
-
-exports.readMembers = function  () {
-  return JSON.parse(fs.readFileSync(memberJSON, 'utf8'));
 }
 
 exports.readUsers = function  () {
@@ -90,15 +85,6 @@ exports.deleteProject = function (projectid) {
   return { success: true}
 }
 
-exports.createMember = function (projectid, userid, role) {
-  const members = exports.readMembers();
-  const newMember = { 
-    projectid,
-    userid,
-    role
-  }
-  members.push(newMember);
-  fs.writeFileSync(memberJSON, JSON.stringify(members, null, 2));
-}
+
 
 

@@ -6,7 +6,7 @@ const { userWithID } = require('../lib/session');
 const { projectRights } = require('../lib/session');
 const { createProject, readProjects, 
         updateProject, deleteProject } = require('../lib/access_project_json');
-const { createMember, readMembers } = require('../lib/access_project_json');
+const { createMember, readMembers, updateMember } = require('../lib/access_member_json');
 const { readUsers } = require('../lib/access_project_json');
 const { readShots } = require('../lib/access_shot_json');
 
@@ -17,9 +17,9 @@ module.exports = function(app, db) {
     const projects = readProjects().map(
       function(project) {
         const members = allMembersOfProject(project.id)
-        .map (function (member) {
-          return { ...member, username: userWithID(member.userid).name};
-        })
+          .map (function (member) {
+            return { ...member, username: userWithID(member.userid).name };
+          });
         project.members = members;
         return project;
       }
@@ -82,7 +82,6 @@ module.exports = function(app, db) {
         return { ...member, username: userWithID(member.userid).name};
       })
 
-      
       project.members = members;
     }
 
@@ -103,6 +102,22 @@ module.exports = function(app, db) {
     const rights = projectRights(member, project.status);
     
     if (loggedIn(req.query) && rights.canEditProject) {
+      if (req.body.members) {
+        req.body.members.map((member) => {
+          const existingMember = readMembers().find((m) => {
+            return ((m.userid === member.userid) && (project.id === m.projectid))
+          })
+          
+          if (existingMember) {
+            console.log('update', member.userid)
+            updateMember(member, project.id);
+          } else {
+            console.log('create', member.userid)
+            createMember(member, project.id);
+          }
+
+        })
+      }
       res.send(updateProject(req.body, req.params.id));
     } else {
       res.send({error: 'ACCESS_DENIED' });

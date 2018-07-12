@@ -1,7 +1,7 @@
 const fs = require('fs');
-const readSessions = require("./access_project_json").readSessions;
-const readMembers = require("./access_project_json").readMembers;
-const readUsers = require("./access_project_json").readUsers;
+const { readSessions } = require("./access_project_json");
+const { readMembers } = require("./access_member_json");
+const { readUsers } = require("./access_project_json");
 const { readProjects } = require('../lib/access_project_json');
 
 exports.loggedIn = function (query) {
@@ -38,15 +38,15 @@ exports.userWithID = function (userID) {
 
 function canReadProject(member, projectstatus) {
   return ((projectstatus === 'public') 
-  || (!!member && (member.role === 'critic' || member.role === 'owner' || member.role === 'animator')));
+  || (!!member && (member.role === 'critic' || member.role === 'owner' || member.role === 'animator', member.role === 'producer')));
 }
 
 function canEditProject (member) {
-  return ((!!member) && (member.role==='owner'));
+  return ((!!member) && (member.role==='owner' || member.role === 'producer'));
 }
 
 function canCreateShots (member) {
-  return ((!!member) && (member.role=='owner' || member.role=='animator'));
+  return ((!!member) && (member.role=='owner' || member.role=='animator' || member.role === 'producer' ));
 }
 
 exports.projectRights = function (member, projectstatus) {

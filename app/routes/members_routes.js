@@ -1,9 +1,7 @@
 const loggedIn = require('../lib/session').loggedIn;
-const { memberOfProject } = require('../lib/session');
-const { rightsForProject } = require('../lib/session');
-const { readProjects } = require('../lib/access_project_json');
-const { readMembers, createMember, updateMember, deleteMember } = require('../lib/access_member_json');
 
+const { rightsForProject } = require('../lib/session');
+const { readMembers, createMember, updateMember, deleteMember } = require('../lib/access_member_json');
 
 module.exports = function(app, db) {
 
