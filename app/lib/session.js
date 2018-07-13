@@ -38,7 +38,7 @@ exports.userWithID = function (userID) {
 
 function canReadProject(member, projectstatus) {
   return ((projectstatus === 'public') 
-  || (!!member && (member.role === 'critic' || member.role === 'owner' || member.role === 'animator', member.role === 'producer')));
+  || (!!member && (member.role === 'critic' || member.role === 'owner' || member.role === 'animator' || member.role === 'producer')));
 }
 
 function canEditProject (member) {

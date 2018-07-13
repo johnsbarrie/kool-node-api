@@ -49,7 +49,8 @@
   {
     "projectid": "5",
     "userid": "dad45678567",
-    "role": "owner"
+    "role": "owner",
+    "username": "dad"
   },
   {
     "userid": "dad45678567",
@@ -101,12 +102,6 @@
     "username": "luc"
   },
   {
-    "projectid": "new884751",
-    "userid": "dad45678567",
-    "role": "critic",
-    "username": "dad"
-  },
-  {
     "projectid": "new646918",
     "userid": "john45678",
     "role": "owner"
@@ -145,10 +140,17 @@
     "id": "new362262"
   },
   {
+    "projectid": "5",
+    "userid": "luc123445678",
+    "username": "luc",
+    "role": "producer",
+    "id": "new218932"
+  },
+  {
     "projectid": "new884751",
-    "userid": "nico45678",
-    "username": "nico",
+    "userid": "user2620223",
+    "username": "cyril",
     "role": "animator",
-    "id": "new672431"
+    "id": "new182904"
   }
 ]

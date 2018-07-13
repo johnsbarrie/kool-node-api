@@ -44,7 +44,14 @@
   {
     "name": "dood",
     "email": "dood@lamenagerie.com",
-    "password": "dooaad",
+    "password": "dood",
     "id": "user262022"
+  }
+  ,
+  {
+    "name": "cyril",
+    "email": "cyril@lamenagerie.com",
+    "password": "cyril",
+    "id": "user2620223"
   }
 ]

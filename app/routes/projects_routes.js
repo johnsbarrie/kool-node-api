@@ -6,7 +6,7 @@ const { userWithID } = require('../lib/session');
 const { projectRights } = require('../lib/session');
 const { createProject, readProjects, 
         updateProject, deleteProject } = require('../lib/access_project_json');
-const { createMember, readMembers, updateMember } = require('../lib/access_member_json');
+const { createMember, readMembers, updateMember, deleteMember } = require('../lib/access_member_json');
 const { readUsers } = require('../lib/access_project_json');
 const { readShots } = require('../lib/access_shot_json');
 
@@ -84,7 +84,6 @@ module.exports = function(app, db) {
 
       project.members = members;
     }
-
     if (project && project.rights.canReadProject) {      
       res.send(JSON.stringify(result));
     } else {
@@ -102,6 +101,7 @@ module.exports = function(app, db) {
     const rights = projectRights(member, project.status);
     
     if (loggedIn(req.query) && rights.canEditProject) {
+      setTimeout(function() {
       if (req.body.members) {
         req.body.members.map((member) => {
           const existingMember = readMembers().find((m) => {
@@ -109,16 +109,22 @@ module.exports = function(app, db) {
           })
           
           if (existingMember) {
-            console.log('update', member.userid)
             updateMember(member, project.id);
           } else {
-            console.log('create', member.userid)
             createMember(member, project.id);
           }
+        });
 
-        })
+        const deletedUsers = allMembersOfProject(req.params.id).filter(member => {
+            const memberStillIncluded = req.body.members.find(m => member.userid === m.userid);
+            return !(memberStillIncluded)
+          }
+        )
+        
+        deletedUsers.map(m => deleteMember(m.userid, req.params.id))
       }
-      res.send(updateProject(req.body, req.params.id));
+        res.send(updateProject(req.body, req.params.id));
+      },500)
     } else {
       res.send({error: 'ACCESS_DENIED' });
     }
@@ -142,21 +148,17 @@ module.exports = function(app, db) {
 
         const createdProject = createProject(req.body);
         if (!createdProject.error) {
+          
           createMember(createdProject.project.id, req.query.userid, 'owner');
           if (req.body.members) {
             req.body.members.map((member) => {
-              if (req.query.userid !== member.userid) {
-                createMember(createdProject.project.id,
-                  member.userid,
-                  member.role
-                )
-              }
+              createMember(member, createdProject.project.id);
             })
           }
         }
 
         res.send(createdProject);
-      },1000);
+      }, 500);
     }
   });
 
