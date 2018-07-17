@@ -7,7 +7,7 @@
   },
   {
     "id": "3456789",
-    "title": "Arrolla ",
+    "title": "Arrolla",
     "description": "Arrolla was, a man who came to the city",
     "status": "private"
   },
@@ -51,12 +51,18 @@
     "id": "new884751",
     "title": "Dorrolla",
     "description": "Dorrolla was a man who came to the city popity pooop",
-    "status": "public"
+    "status": "private"
   },
   {
     "title": "Doodle",
     "description": "I like to doodle and animate",
     "status": "private",
     "id": "new646918"
+  },
+  {
+    "id": "new224613",
+    "title": "My Project",
+    "description": "what",
+    "status": "private"
   }
 ]

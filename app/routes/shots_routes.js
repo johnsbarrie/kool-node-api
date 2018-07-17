@@ -28,7 +28,6 @@ module.exports = function(app, db) {
 
   /** CREATE SHOTs */
   app.post('/projects/:project_id/shots/', (req, res) => {
-    console.log(req.body)
     const rights = rightsForProject(req);
     if (loggedIn(req.query) && rights && rights.canCreateShots){
       res.send({
