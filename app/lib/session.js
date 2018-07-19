@@ -64,6 +64,9 @@ exports.rightsForProject = function(req){
     return p.id === req.params.project_id
   });
 
+  if(!project) {
+    return {};
+  }
   const member = exports.memberOfProject(req.query.userid, req.params.project_id);
   return exports.projectRights(member, project.status) || {};
 }

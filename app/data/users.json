@@ -42,12 +42,6 @@
     "email": "nico@lamenagerie.com"
   },
   {
-    "name": "dood",
-    "email": "dood@lamenagerie.com",
-    "password": "dood",
-    "id": "user262022"
-  },
-  {
     "name": "cyril",
     "email": "cyril@lamenagerie.com",
     "password": "cyril",
@@ -58,5 +52,17 @@
     "email": "piers@kyan.com",
     "password": "piers",
     "id": "user2620224"
+  },
+  {
+    "name": "j",
+    "email": "j",
+    "password": "john",
+    "id": "user952479"
+  },
+  {
+    "name": "dood2",
+    "email": "dood@lamenagerie.com",
+    "password": "dooaad",
+    "id": "user772767"
   }
 ]

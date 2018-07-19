@@ -136,7 +136,6 @@ module.exports = function(app, db) {
       res.send({error: 'NOT_LOGGED' });
     } else {
       setTimeout(function() {
-        
         const isMemberOfProjectWithSameTitle = !!(readProjects().filter(function (p) {
           return (p.title === req.body.title) && (memberOfProject(req.query.userid, p.id))
         }).length)
@@ -148,8 +147,13 @@ module.exports = function(app, db) {
 
         const createdProject = createProject(req.body);
         if (!createdProject.error) {
-          
-          createMember(createdProject.project.id, req.query.userid, 'owner');
+          createMember(
+            {
+              'userid': req.query.userid, 
+              'role': 'owner'
+            },
+            createdProject.project.id
+          );
           if (req.body.members) {
             req.body.members.map((member) => {
               createMember(member, createdProject.project.id);

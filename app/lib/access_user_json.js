@@ -6,6 +6,7 @@ exports.readUsers = function  () {
 }
 
 function hasCorrectProps(user) {
+  console.log('user', user)
   return (user.name && user.email && user.password);
 }
 
@@ -37,7 +38,7 @@ exports.updateUser = function  (userid, loggedUserId, userData) {
  
   var recordedChange = false;
   const users = exports.readUsers().map(function(user) {
-    console.log(userid === user.id)
+
     if ((userid === user.id) && (loggedUserId === user.id)) {
       user = {
         ...user,

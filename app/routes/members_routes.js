@@ -5,7 +5,7 @@ const { readMembers, createMember, updateMember, deleteMember } = require('../li
 
 module.exports = function(app, db) {
 
-  /** LIST SHOTS */
+  /** LIST MEMBERS */
   app.get('/projects/:project_id/members/', (req, res) => {
     const rights = rightsForProject(req);
     if(loggedIn(req.query) && rights && rights['canReadProject']){
@@ -20,20 +20,17 @@ module.exports = function(app, db) {
     }
   })
 
-  /** CREATE SHOTs */
+  /** CREATE MEMBER */
   app.post('/projects/:project_id/members/', (req, res) => {
     const rights = rightsForProject(req);
     if (loggedIn(req.query) && rights && rights.canEditProject){
-      res.send({
-        success:true,
-        member: createMember(req.body, req.params.project_id)
-      });
+      res.send(createMember(req.body, req.params.project_id));
     } else {
       res.send(JSON.stringify({ error: 'ACCESS_DENIED'}));
     }
   });
 
-  /** SHOT BY ID */
+  /** MEMBER BY ID */
   app.get('/projects/:project_id/members/:id', (req, res) => {
     const rights = rightsForProject(req);
     if (project.status === 'public' || (loggedIn(req.query) && rights.canReadProject)) {
@@ -44,7 +41,7 @@ module.exports = function(app, db) {
     res.send({ error: 'ACCESS_DENIED'});
   });
 
-  /** UPDATE SHOT BY ID */
+  /** UPDATE MEMBER BY ID */
   app.put('/projects/:project_id/members/:id', (req, res) => {
     const rights = rightsForProject(req);
     if (loggedIn(req.query) && rights.canEditProject) {
@@ -57,7 +54,7 @@ module.exports = function(app, db) {
     res.send({ error: 'ACCESS_DENIED'});
   });
 
-  /** DELETE SHOT */
+  /** DELETE MEMBER */
   app.delete('/projects/:project_id/members/:id', (req, res) => {
     const rights = rightsForProject(req);
 

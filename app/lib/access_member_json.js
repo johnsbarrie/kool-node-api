@@ -43,7 +43,9 @@ exports.createMember = function  (newMember, projectid) {
   }
   members.push(newMember) 
   fs.writeFileSync(membersJSON, JSON.stringify(members, null, 2));
-  return newMember;
+  return {
+    member: newMember
+  };
 }
 
 exports.readMember = function  (shotid) {

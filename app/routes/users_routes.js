@@ -18,10 +18,19 @@ module.exports = function(app, db) {
 
   /** CREATE USERS */
   app.post('/users', (req, res) => {
-    res.send({
-      success:true,
-      shot: createUser(req.body, req.query.userid)
-    });
+    const result = createUser(req.body)
+    
+    if (result.error) {
+      res.send({
+        success:false,
+        error: result.error
+      });
+    } else {
+      res.send({
+        success:true,
+        
+      });
+    }
   });
 
   /** UPDATE USER BY ID */

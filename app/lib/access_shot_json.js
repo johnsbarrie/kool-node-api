@@ -60,7 +60,6 @@ exports.updateShot = function  (userid, shotData, project_id, shotid) {
   }
 }
 
-
 exports.deleteShot = function  (userid, project_id, shotid) {
   var deletingShot = 'false'
   const shots = exports.readShots().filter(function(shot) {
@@ -76,8 +75,9 @@ exports.deleteShot = function  (userid, project_id, shotid) {
   });
   
   fs.writeFileSync(shotsJSON, JSON.stringify(shots, null, 2));
-    
+  const error = (deletingShot==='true') ? null : 'SHOT_NOT_FOUND';
   return { 
-    success: deletingShot
+    success: deletingShot,
+    error: error
   }
 }

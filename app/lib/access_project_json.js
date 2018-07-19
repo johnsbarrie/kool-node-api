@@ -7,6 +7,14 @@ exports.readProjects = function  () {
   return JSON.parse(fs.readFileSync(projectJSON, 'utf8'));
 }
 
+exports.readProjectById = function  (id) {
+  const project = exports.readProjects().find((project) => {
+    return (project.id === id);
+  });
+   
+  return project;
+}
+
 exports.readUsers = function  () {
   return JSON.parse(fs.readFileSync(userJSON, 'utf8'));
 }

@@ -1,8 +1,7 @@
 const { loggedIn } = require('../lib/session');
 const { rightsForProject } = require('../lib/session');
-const { readUsers } = require('../lib/access_project_json');
-const { readShot, createShot, updateShot, deleteShot } = require('../lib/access_shot_json');
-
+const { readUsers, readProjectById } = require('../lib/access_project_json');
+const { readShots, readShot, createShot, updateShot, deleteShot } = require('../lib/access_shot_json');
 
 module.exports = function(app, db) {
   /** LIST SHOTS */
@@ -41,9 +40,11 @@ module.exports = function(app, db) {
 
   /** SHOT BY ID */
   app.get('/projects/:project_id/shots/:id', (req, res) => {
+    const project = readProjectById(req.params.project_id);
+    
     const rights = rightsForProject(req);
     if (project.status === 'public' || (loggedIn(req.query) && rights.canReadProject)) {
-      res.send(readShot(req.params.id, project.id));
+      res.send(readShot(req.params.id, req.params.project_id));
       return 
     };
     res.send({ error: 'ACCESS_DENIED'});

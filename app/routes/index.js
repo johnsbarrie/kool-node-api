@@ -6,6 +6,12 @@ const userRoutes = require('./users_routes');
 const timelineRoutes = require('./timelines_routes');
 const imageRoutes = require('./images_routes');
 
+const defaultRoute = function (app, db) {
+  app.get('*', (req, res) => {
+    res.send({ error: 'UNKNOWN_END_POINT' });
+  });
+}
+
 module.exports = function(app, db) {
   shotRoutes(app, db);
   projectRoutes(app, db);
@@ -14,4 +20,5 @@ module.exports = function(app, db) {
   userRoutes(app, db);
   timelineRoutes(app, db);
   imageRoutes(app,db);
+  defaultRoute(app, db);
 };
