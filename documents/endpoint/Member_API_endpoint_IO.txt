@@ -1,0 +1,138 @@
+SHOT
+  READ_ALL
+
+    URL : /projects/:product_id/members
+    METHOD: get
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+      [
+        {
+          "projectid": "3456789",
+          "userid": "john45678",
+          "role": "owner",
+          "username": "john"
+        },
+        {
+          "projectid": "3456789",
+          "userid": "nico45678",
+          "username": "nico",
+          "role": "animator",
+          "id": "new362262"
+        }
+      ]
+
+    FAILED:
+      {"error":"ACCESS_DENIED"}
+
+
+  CREATE MEMBER
+
+    URL : /projects/:product_id/members/
+    METHOD: post
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+      {
+        "userid":"dad45678567",
+        "role":"critic"
+      }
+
+    RESPONSE :
+      SUCCESS:
+       {
+        "success": "true",
+        "member": {
+            "userid": "dad45678567",
+            "role": "critic",
+            "id": "new757292",
+            "projectid": "3456789"
+        }
+      }
+
+    FAILED:
+      {"error":"ACCESS_DENIED"}
+
+
+
+  READ MEMBER
+
+    URL : /projects/:product_id/members
+    METHOD: get
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+    {
+      "success": true,
+      "member": {
+        "projectid":"3456789",
+        "userid":"john45678",
+        "role":"owner",
+        "username":"john"
+      }
+    }
+
+  FAILED:
+    {"error":"ACCESS_DENIED"}
+
+
+  
+  UPDATE MEMBER
+
+    URL : /projects/:product_id/members/:member_id
+    METHOD: put
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+    {
+      "userid":"dad45678567",
+      "role":"critic"
+    }
+
+    RESPONSE :
+      SUCCESS:
+      {
+        "success": true
+      }
+
+    FAILED:
+      {"error":"MEMBER_NOT_FOUND"} ||
+      {"error":"ACCESS_DENIED"}
+
+
+  DELETE MEMBER
+
+    URL : /projects/:product_id/members/:member_id
+    METHOD: delete
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+      
+      }
+
+    FAILED:
+      {"error":"MEMBER_NOT_FOUND"} ||
+      {"error":"ACCESS_DENIED"}
+
+
+
+

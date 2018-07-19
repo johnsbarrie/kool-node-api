@@ -1,0 +1,41 @@
+
+SESSION
+
+ SIGN_IN
+  URL : /signin
+  METHOD: post
+
+  AUTHORISATION:
+  HEADERS:
+  PARAMS: 
+
+  BODY :
+    {"name":"john","password":"john"}
+
+  RESPONSE :
+   SUCCESS:
+      {"userid":"john45678","jwt":"john45678_fakejwt"}
+    FAILED :
+    {"error":"LOGIN_ERROR"}
+
+
+ SIGN_OUT
+  URL : /signout
+  METHOD: post
+
+  AUTHORISATION: SIGN_IN
+  HEADERS:
+  PARAMS: 
+
+  BODY :
+    {"name":"john","password":"john"}
+
+  RESPONSE :
+   SUCCESS:
+      {"userid":"john45678","jwt":"john45678_fakejwt"}
+    FAILED :
+    {"error":"LOGIN_ERROR"}
+  
+
+
+

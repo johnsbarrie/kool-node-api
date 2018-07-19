@@ -1,0 +1,33 @@
+IMAGE
+  
+  CREATE IMAGE
+
+    URL : /projects/:product_id/images/
+    METHOD: post
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+      {
+        "name": "0000002",
+        "base64": "data:image/png;base64,iVBORw0KGgo...."
+      }
+
+    RESPONSE :
+      SUCCESS:
+      {
+        "success": "true"
+      }
+
+    FAILED:
+      {"error":"IMAGE_EXISTS"} ||
+      {"error":"ACCESS_DENIED"}
+
+
+
+
+
+
+
+

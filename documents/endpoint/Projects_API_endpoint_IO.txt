@@ -1,0 +1,219 @@
+ PROJECT
+  READ_ALL
+
+    URL : /projects
+    METHOD: get
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+          [
+            {
+              "id": "3456789",
+              "title": "Arrolla ",
+              "description": "arrolla was, a man who came to the city",
+              "status": "public",
+              "members": [
+                {
+                  "projectid": "3456789",
+                  "userid": "john45678",
+                  "role": "owner",
+                  "username": "john"
+                },
+                ....
+              ],
+              "rights": {
+                "canReadProject": true,
+                "canEditProject": true,
+                "canCreateShots": true
+              }
+            },
+            .....
+          ]
+        FAILED : 
+
+
+    READ PROJECT
+
+      URL : /projects
+      METHOD: put
+
+      AUTHORISATION: SIGNED_IN
+      HEADERS:
+      PARAMS: 
+      BODY :
+
+      RESPONSE :
+        SUCCESS:
+
+      {
+        "project": {
+          "id": "3456789",
+          "title": "Arrolla ",
+          "description": "arrolla was, a man who came to the city",
+          "status": "public",
+          "shots": [
+            {
+              "id": "1",
+              "projectid": "3456789",
+              "userid": "john45678",
+              "title": "ARROL_01",
+              "description": "dancing",
+              "status": "IN_PROGRESS"
+            },
+            {
+              "id": "2",
+              "projectid": "3456789",
+              "userid": "john45678",
+              "title": "ARROL_02",
+              "description": "running",
+              "status": "IN_PROGRESS"
+            },
+            {
+              "id": "3",
+              "projectid": "3456789",
+              "userid": "john45678",
+              "title": "ARROL_03",
+              "description": "arrolla eating a sandwich",
+              "status": "IN_PROGRESS"
+            },
+            {
+              "id": "4",
+              "projectid": "3456789",
+              "userid": "john45678",
+              "title": "ARROL_04",
+              "description": "what will he do now",
+              "status": "IN_PROGRESS"
+            },
+            ...
+          ],
+          "rights": {
+            "canReadProject": true,
+            "canEditProject": true,
+            "canCreateShots": true
+          },
+          "members": [
+            {
+              "projectid": "3456789",
+              "userid": "john45678",
+              "role": "owner",
+              "username": "john"
+            },
+            {
+              "projectid": "3456789",
+              "userid": "nico45678",
+              "username": "nico",
+              "role": "animator",
+              "id": "new362262"
+            }
+          ]
+        },
+        "error": null
+      }
+
+      FAILED:
+        {"error":"ACCESS_DENIED"}
+
+     CREATE PROJECT
+
+      URL : /projects/:product_id
+      METHOD: POST
+
+      AUTHORISATION: SIGNED_IN
+      HEADERS:
+      PARAMS: 
+      BODY :
+        {
+          "title":"Arrolla ",
+          "description": "arrolla was, a man who came to the city",
+          "status": "public",
+          "members":[
+            {"userid":"luc123445678","role":"animator"},
+            {"userid":"dad45678567","role":"critic"}
+          ]
+        }
+
+        RESPONSE :
+          SUCCESS:
+        {
+          "success": true,
+          "project": {
+              "title": "DOOrrolla ",
+              "description": "DOOrrolla was, a man who came to the city",
+              "status": "public",
+              "id": "new486195",
+                "members":[
+                  {"userid":"john467","role":"owner"},
+                  {"userid":"luc123445678","role":"animator"},
+                  {"userid":"dad45678567","role":"critic"}
+                ]
+          }
+        }
+      
+        FAILED:
+          {"error":"ACCESS_DENIED"}
+
+     UPDATE PROJECT
+
+      URL : /projects/:product_id
+      METHOD: put
+
+      AUTHORISATION: SIGNED_IN
+      HEADERS:
+      PARAMS: 
+      BODY :
+        {
+          "title":"Arrolla ",
+          "description": "arrolla was, a man who came to the city",
+          "status": "public",
+          "members":[
+            {"userid":"luc123445678","role":"animator"},
+            {"userid":"dad45678567","role":"critic"}
+          ]
+        }
+
+        RESPONSE :
+          SUCCESS:
+        {
+            "success": true
+        }
+      
+        FAILED:
+          {"error":"ACCESS_DENIED"}
+
+
+     ***DELETE PROJECT
+
+      URL : /projects/:product_id
+      METHOD: delete
+
+      AUTHORISATION: SIGNED_IN
+      HEADERS:
+      PARAMS: 
+      BODY :
+        {
+          "title":"Arrolla ",
+          "description": "arrolla was, a man who came to the city",
+          "status": "public",
+          "members":[
+            {"userid":"luc123445678","role":"animator"},
+            {"userid":"dad45678567","role":"critic"}
+          ]
+        }
+
+        RESPONSE :
+          SUCCESS:
+        {
+            "success": true
+        }
+      
+        FAILED:
+          {"error":"ACCESS_DENIED"}
+
+
+
+    

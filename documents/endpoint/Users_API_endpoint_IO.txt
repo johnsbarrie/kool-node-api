@@ -1,0 +1,140 @@
+USERS
+  READ_ALL
+
+    URL : /projects/:product_id/users
+    METHOD: get
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+      [
+        {
+          "id": "john45678",
+          "name": "john",
+          "password": "john",
+          "email": "john@lamenagerie.com"
+        },
+        {
+          "id": "joanna45678",
+          "name": "joanna",
+          "password": "joanna",
+          "email": "joanna@lamenagerie.com"
+        },
+        ...
+      ]
+
+    FAILED:
+      {"error":"ACCESS_DENIED"}
+
+
+  CREATE USER
+
+    URL : /projects/:product_id/users/
+    METHOD: post
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+      {
+        "userid":"dad45678567",
+        "role":"critic"
+      }
+
+    RESPONSE :
+      SUCCESS:
+       {
+        "success": "true",
+        "user": {
+          "name": "john",
+          "email": "john@lamenagerie.com",
+          "id": "user569775"
+        }
+      }
+
+    FAILED:
+      { "error": "USER_EXISTS" } ||
+      {"error":"ACCESS_DENIED"}
+
+
+
+  READ USER
+
+    URL : /projects/:product_id/users
+    METHOD: get
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+    {
+      "success": true,
+      "member": {
+        "projectid":"3456789",
+        "userid":"john45678",
+        "role":"owner",
+        "username":"john"
+      }
+    }
+
+  FAILED:
+    {"error":"ACCESS_DENIED"}
+
+
+  
+  UPDATE USER
+
+    URL : /projects/:product_id/users/:user_id
+    METHOD: put
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+    {
+      "name":"john",
+      "email":"dood@lamenagerie.com",
+      "password":"dood"
+    }
+
+    RESPONSE :
+      SUCCESS:
+      {
+        "success": true
+      }
+
+    FAILED:
+      {"error":"USER_NOT_FOUND"} ||
+      {"error":"ACCESS_DENIED"}
+
+
+  DELETE SHOT
+
+    URL : /projects/:product_id/users/:users_id
+    METHOD: delete
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+      {
+        "success": true
+      }
+    RESPONSE :
+      SUCCESS:
+
+
+    FAILED:
+
+      {"error":"ACCESS_DENIED"}
+
+
+
+

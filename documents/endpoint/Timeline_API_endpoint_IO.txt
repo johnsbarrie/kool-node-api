@@ -1,0 +1,71 @@
+TIMELINE
+
+  READ TIMELINE
+
+    URL : /projects/:product_id/shots/:shot_id/timeline
+    METHOD: get
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+    {
+      "success": true,
+      "timeline: {
+        "images": [
+            "0000001",
+            "0000002",
+            "0000443",
+            "0000167",
+            "0000011",
+            "0000011",
+            "0000011"
+        ]
+      }
+    }
+
+  FAILED:
+    { "success": false } ||
+    {"error":"ACCESS_DENIED"}
+
+
+  
+  UPDATE TIMELINE
+
+    URL : /projects/:product_id/shots/:shot_id/timeline
+    METHOD: put
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+      {
+        "images":
+          [
+            "0000001",
+            "0000002",
+            "0000003",
+            "0000015",
+            "0000011",
+            "0000011",
+            "0000011"
+          ]
+      }
+
+    RESPONSE :
+      SUCCESS:
+      { "success": true }
+
+    FAILED:
+      {"error":"PROJECT_NOT_FOUND"} ||
+      {"error":"SHOT_NOT_FOUND"} ||
+      {"error":"ACCESS_DENIED"}
+
+
+
+
+
+

@@ -1,0 +1,161 @@
+SHOT
+  READ_ALL
+
+    URL : /projects/:product_id/shots
+    METHOD: get
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+    [
+      {
+        "id": "1",
+        "projectid": "3456789",
+        "userid": "john45678",
+        "title": "ARROL_01",
+        "description": "dancing",
+        "status": "IN_PROGRESS"
+      },
+      {
+        "id": "2",
+        "projectid": "3456789",
+        "userid": "john45678",
+        "title": "ARROL_02",
+        "description": "running",
+        "status": "IN_PROGRESS"
+      }
+      ...
+    }
+
+  FAILED:
+    {"error":"ACCESS_DENIED"}
+
+
+  CREATE SHOT
+
+    URL : /projects/:product_id/shots/
+    METHOD: post
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+      {
+        "title":"new shot project",
+        "description":"shot description"
+      }
+
+    RESPONSE :
+      SUCCESS:
+        {
+            "success": true,
+            "shot": {
+                "title": "new shot project",
+                "description": "shot description",
+                "id": "new450153",
+                "status": "IN_PROGRESS",
+                "projectid": "3456789",
+                "userid": "john45678"
+            }
+        }
+
+    FAILED:
+      {"error":"ACCESS_DENIED"}
+
+
+
+  READ SHOT
+
+    URL : /projects/:product_id/shots/:shot_id
+    METHOD: get
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+    {
+      "success": true,
+      "shot": {
+          "id": "1",
+          "projectid": "3456789",
+          "userid": "john45678",
+          "title": "ARROL_01",
+          "description": "dancing",
+          "status": "IN_PROGRESS"
+      }
+    }
+
+  FAILED:
+    {"error":"ACCESS_DENIED"}
+
+
+  
+  UPDATE SHOT
+
+    URL : /projects/:product_id/shots/:shot_id
+    METHOD: put
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+    {
+        "title": "new shot john",
+        "description": "shot description"
+    }
+
+    RESPONSE :
+      SUCCESS:
+      {
+        "success": true,
+        "shot": {
+            "id": "1",
+            "projectid": "3456789",
+            "userid": "john45678",
+            "title": "ARROL_01",
+            "description": "dancing",
+            "status": "IN_PROGRESS"
+        }
+      }
+
+    FAILED:
+      {"error":"ACCESS_DENIED"}
+
+
+  DELETE SHOT
+
+    URL : /projects/:product_id/shots/:shot_id
+    METHOD: delete
+
+    AUTHORISATION: SIGNED_IN
+    HEADERS:
+    PARAMS: 
+    BODY :
+
+    RESPONSE :
+      SUCCESS:
+      {
+        "success": true,
+        "shot": {
+            "id": "1",
+            "projectid": "3456789",
+            "userid": "john45678",
+            "title": "ARROL_01",
+            "description": "dancing",
+            "status": "IN_PROGRESS"
+        }
+      }
+
+    FAILED:
+      { "error": "SHOT_NOT_FOUND" }
+
+
+
+

@@ -1,0 +1,38 @@
+const ROLES = [
+    'critic',
+    'owner',
+    'animator',
+    'producer'
+  ]
+
+const PERMISSIONS = [
+    'critic': {
+      'canReadProject': true,
+      'canEditProject': false,
+      'canCreateShots': false
+    },
+    'owner': {
+      'canReadProject': true,
+      'canEditProject': true,
+      'canCreateShots': true
+    },
+    'animator': {
+      'canReadProject': true,
+      'canEditProject': false,
+      'canCreateShots': true
+    },
+    'producer': {
+      'canReadProject': true,
+      'canEditProject': true,
+      'canCreateShots': true
+    },
+
+  ]
+
+
+
+
+
+
+
+

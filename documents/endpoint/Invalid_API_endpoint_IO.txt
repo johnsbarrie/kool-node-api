@@ -1,0 +1,5 @@
+INVALID ENDPOINT
+  RESPONSE :
+  {
+    "error": "UNKNOWN_END_POINT"
+  }
